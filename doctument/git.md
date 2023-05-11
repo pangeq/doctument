@@ -44,3 +44,4 @@ Host github.com
 >- git push origin uat （把uat分支推送到远程）
 >- git branch --set-upstream-to=origin/uat（关联本地代码和远程仓库分支）
 >- git branch -a （查看所有分支）
+>- git remote remove origin (解除关联，也可以直接删除.git 重新设置)

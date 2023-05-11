@@ -46,3 +46,17 @@
 >其次，对于Java7而言，OpenJDK 和 OracleJDK 十分接近。Oracle JDK 是基于 OpenJDK 开发的，只添加了一些小功能，由Oracle工程师参与维护。
 >区别：
 >- 是否开源：OpenJDK 是一个参考模型并且完全开源，OracleJDK 是基于OpenJDK实现，并不完全开源。openJdk开源项目：https://github.com/openjdk/jdk
+>- 是否免费：OpenJDK 完全免费；OracleJDK 会提供免费版本，但会有期限限制。JDK17 之后的版本可以免费和分发商用，但仅有3年时间，三年后无法免费商用。不过，JDK8u221 之前的只要不升级，则可以无期限免费。
+>- 功能性：OracleJDK 在OpenJDk的基础上添加了一些特有的功能和工具。比如 Java Flight Recorder （JFR,一种监控工具），Java Mission Control （JMC,一种监控工具）。不过在Jdk11 之后，OracleJDK 和 OpenJDK 的功能基本一致，之前oracle大多数的私有组件也都捐赠给了开源组织。
+>- 稳定性：OpenJDK 不通过LTS服务（长期服务），而OracleJDK大概每三年会推出一个LTS版本进行长期维护。不过很多公司的都基于OpenJdk 提供了对应OraclJDK 周期相同的LTS 版本，因此两者的稳定性其实也差不多
+>- 协议性：OracleJDK 使用BCL/OTN 协议获得许可，而OpenJDK 根据GPL v2获得许可。
+>既然OracleJDK 这么好，为什么OpenJdK 还会存在？
+>- OpenJDK 是开源的 开源的意味着你可以根据自己的需要进行修改、优化。例如Alibaba 基于OpenJDK 开发了 Dragonwell8 https://github.com/alibaba/dragonwell8
+>- OpenJDK 是商业免费的，（这也是为什么yum包管理器上默认安装的是OpenJDK）。虽然OracleJDK 也是商业免费（JDK8）,但不是所有版本免费。
+>- OpenJDK更新频率更快。Oracle JDK一般6个月发布一次新版本，而OpenJDK 一般三个月发布一次新版本。（这也是oracleJdk 稳定的原因，现在OpenJDK 上试试水，把问题解决后才会放在 Oracle JDK上。）
+>>![oracle jdk release cadence]()
+>- Oracle JDK 和 Open JDK 如何选择？
+>>建议选择OpenJdk 或者基于OpenJDK 的发行版，比如AWS 的Amazon Corretto,阿里巴巴的Alibaba Dragonwell。
+>- 扩展一下：
+>> BCL协议（Oracle Binary Code License Agreement）： 可以使用JDK（支持商用），但不可以修改
+>> OTN（Oracle Technology NetWork License Agreement）：11及之后新发布的JDK都用的是这个协议，可以自己私下用，商用需要付费。

@@ -38,6 +38,7 @@
 >>我们可以将高级编程语言根据执行方式分成两种：
 >>- 编译型：编译型语言会通过编译器将源代码一次性翻译成可供该平台执行的机器码。一般情况下，编译语言执行的速度比较快，开发效率比较低。常见的语言有C、C++、GO、Rust。
 >>- 解释型：解释型语言会将源代码一句一句的解释为机器码后再执行。解释性语言开发效率比较快，执行效率比较低。常见的语言 Python、Javascript、PHP。
+>>![编译型语言和解释型语言](https://github.com/pangeq/doctument/blob/06b38673ab0798e73cc9cd7123c07e0f87913efb/image/java/java-virtual-machine-program-language-os.png)
 >>- 根据维基百科介绍：为了改善编译语言的效率而发展出的即时编译技术，已经缩小了这两种类型语言的差距。这种技术混合了编译语言与解释型语言的优点，他像编译语言一样，先把程序源代码编译成字节码。到执行时将字节码直译，之后执行。Java和LLVM是这种技术的代表产物。
 >>- 为什么说JAVA语言“编译与解释并存 ：这是因为Java具有这两种解释性、编译型语言的特征，因为Java程序需要先编译，后解释两个步骤，有Java编写的程序需要先经过编译步骤，生成字节码（.class文件），这种字节码必须由Java解释器来进行解释执行。
 
@@ -54,9 +55,10 @@
 >- OpenJDK 是开源的 开源的意味着你可以根据自己的需要进行修改、优化。例如Alibaba 基于OpenJDK 开发了 Dragonwell8 https://github.com/alibaba/dragonwell8
 >- OpenJDK 是商业免费的，（这也是为什么yum包管理器上默认安装的是OpenJDK）。虽然OracleJDK 也是商业免费（JDK8）,但不是所有版本免费。
 >- OpenJDK更新频率更快。Oracle JDK一般6个月发布一次新版本，而OpenJDK 一般三个月发布一次新版本。（这也是oracleJdk 稳定的原因，现在OpenJDK 上试试水，把问题解决后才会放在 Oracle JDK上。）
->>![oracle jdk release cadence]()
+>>![oracle jdk release cadence](https://github.com/pangeq/doctument/blob/uat/image/java/oracle-jdk-release-cadence.jpg)
 >- Oracle JDK 和 Open JDK 如何选择？
 >>建议选择OpenJdk 或者基于OpenJDK 的发行版，比如AWS 的Amazon Corretto,阿里巴巴的Alibaba Dragonwell。
 >- 扩展一下：
 >> BCL协议（Oracle Binary Code License Agreement）： 可以使用JDK（支持商用），但不可以修改
 >> OTN（Oracle Technology NetWork License Agreement）：11及之后新发布的JDK都用的是这个协议，可以自己私下用，商用需要付费。
+>> ![](https://github.com/pangeq/doctument/blob/06b38673ab0798e73cc9cd7123c07e0f87913efb/image/java/up-5babce06ef8fad5c4df5d7a6cf53d4a7901.webp)

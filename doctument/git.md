@@ -22,16 +22,25 @@ Host gitlab
 # github
 Host github.com
   HostName ssh.github.com
-  User xxx@163.com
+  User XXX@163.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_github_rsa
   Port 443
 ```
->- 接下来生成密钥 ssh-keygen -t rsa -C "XXX@163.com" -f ../.ssh/id_gitlab_rsa
->- id_gitlab_rsa 为私钥
->- id_gitlab_rsa.pub 为公钥
->- 登录 https://gitlab.com/ 找到setting——>ssh keys 把公钥添加
+>- 接下来生成github密钥 ssh-keygen -t ed25519 -C "XXX@163.com"
+>回车后输入密钥文件名字  id_github_rsa
+>- id_github_rsa 为私钥
+>- id_github_rsa.pub 为公钥
+>- 登录 https://github.com/ 找到setting——>ssh keys 添加公钥
 
 
 ### 二、关联远程仓库
->- git init
+>- git init  （初始化git）
+>- git status （查看当前代码状态）
+>- git add .
+>- git commit -m 'init'
+>- git checkout -b uat（创建本地分支）
+>- git remote add origin 'git@github.com:XXX/autonomy.git' (设置远程分支)
+>- git push origin uat （把uat分支推送到远程）
+>- git branch --set-upstream-to=origin/uat（关联本地代码和远程仓库分支）
+>- git branch -a （查看所有分支）

@@ -62,3 +62,60 @@
 >> BCL协议（Oracle Binary Code License Agreement）： 可以使用JDK（支持商用），但不可以修改
 >> OTN（Oracle Technology NetWork License Agreement）：11及之后新发布的JDK都用的是这个协议，可以自己私下用，商用需要付费。
 >> ![](https://github.com/pangeq/doctument/blob/06b38673ab0798e73cc9cd7123c07e0f87913efb/image/java/up-5babce06ef8fad5c4df5d7a6cf53d4a7901.webp)
+
+### Java 和 C++ 区别？
+> 同：都是面向对象语言，都支持封装、继承、多态
+> 异：
+>> - java 不提供指针来直接访问内存，程序内存更加安全
+>> - java 类是单继承，C++支持多重继承，虽然java类不支持多继承，但是接口支持。
+>> - java有自动内存管理垃圾回收机制（GC）,不需要管理员手动释放。
+>> - C++ 同时支持方法重载和操作符重载，java 只支持方法重载，操作符重载操作复杂，违背了java 最初设计思想。
+
+## 二、基本语法
+### 注释有哪几种形式？
+>![Java 注释类型总结](https://github.com/pangeq/doctument/blob/uat/image/java/java-annotation-types.png)
+>- 单行注释：通常用于解释某方法内单行代码作用
+>- 多行注释：用于解释一段代码左右
+>- 文档注释：通常用于生成java 开发文档
+>用的比较多的是单行注释和文档注释，多行注释则相对使用较少
+> ```java
+> /**
+> *文档注释
+> */
+> //单行注释 
+> ```
+
+> 注释是代码的解释说明书，利于人们方便解读，快速理清代码之间的关系，注释不是越详细越好。好的代码本身就是注释，我们要尽量规范和美化自己的代码，来减少不必要的注释。
+> 若编程语言有足够表达力，就不需要注释，通过代码来阐述即可。
+> ```java
+> // check to see if the employee is eligible for full benefits
+> if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
+> //同义可以用如下来表达：
+> if (employee.isEligibleForFullBenefits())
+> ```
+
+### 标识符和关键字的区别是什么
+>在我们编写代码时侯，需要大量的为程序、类、方法、变量等取名字，于是就有了标识符。简单来说，标识符就是一个名字。
+>有一些标识符被java赋予了特殊的含义，只能用于特定地方，这些特殊的标识符就被称为关键字，关键字是被赋予特殊含义的标识符。就比如我们要开一家店，需要给这个店取名字，但是名字不可以是“警察局”，因为“警察局”已经被赋予了特殊的含义。
+
+### Java 语言关键字有哪些?
+| 分类 | 关键字 |  |  |  |  |  |  |
+| :--- | :--: | :----: | :----: | :----: | :----: | :----: | :----: |
+| 访问控制 | private | protectoed | public |||||
+| 类，方法和变量修饰符 | abstract | class | extends | final | implements | interface | native |
+| | new | static | stricfp | synchronized | transient | volatile | enumn |
+| 程序控制 | break | continue | return | do | while | if | else | 
+| | for | instanceof | switch | case | default | assert | |
+| 错误处理 | try | catch | throw | throws | finally | | |
+| 包相关 | import | package |  |  |  |  |  |
+| 基本类型 | boolean | byte | char | double | float | int | long |
+| | short | |  |  |  |  |  |  |
+| 变量引用 | super | this | void |  |  |  |  |
+| 保留字 | goto | const | |  |  |  |  |
+>Tips：所以关键字都是小写，在IDEA 会以特殊颜色现实
+>default 这个关键字很特殊，既属于程序控制，又属于类，方法和变量修饰符，还属于访问控制。
+>- 在程序控制中，当在 **switch** 中匹配不到任何情况时，可以使用 **default** 来编写默认匹配情况。
+>- 在类，方法和修饰符情况中，从JDK8中引入了默认方法，可以使用 **default** 来定义一个方法的默认实现。
+>- 在访问控制中，如果一个方法前没有任何修饰符，则默认会有一个默认修饰符 **default** ,但这个修饰符手动加上则会报错。
+>⚠️ 注意：虽然  **true** ，**false** , 和 **null** 看起来很像关键字，但实际上就是字面意思，同时你也不可以作为标识符来使用。
+>官方文档： https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html

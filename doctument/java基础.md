@@ -251,3 +251,90 @@
 >这八种基本类型都有对应的包装类分别为：Byte、Short、Integer、Long、Float、Double、Character、Boolean。
 
 ### 基本类型和包装类型的区别？
+> ![基本类型vs包装类型](https://github.com/pangeq/doctument/blob/uat/image/java/primitive-type-vs-packaging-type.png)
+>- 用途：除了定义一些常量和局部变量之外，我们在其他地方比如方法参数、对象属性中很少会使用基本类型来定义变量。并且，包装类型可用于泛型，而基本类型不可以。
+>- 存储方式：基本数据类型的局部变量存放在Java虚拟机栈中的局部变量表中，基本数据类型的成员变量（未被static修饰）存放在java虚拟机的堆中。包装类属于对象类型，我们知道几乎所有的对象实例都存在于堆中。
+>- 占比空间：相比于包装类型（对象类型），基本数据类型占用的空间往往非常小。
+>- 默认值：成员变量包装类型不赋值就是null,而基本类型有默认值且不是null.
+>- 比较方式：对于基本数据类型，==比较的是值。对于包装类型来说，==比较的是对象的内存地址。所有整形包装类对象之间值的比较，全部使用equals()方法。
+>为什么说几乎所有的对象实例都存在于堆中呢？
+>这是因为HotSpot虚拟机引入了JIT优化之后，会对对象进行逃逸分析，如果发现某一个对象并没有逃逸到方法外部，那么就可能通过标量替换线上来实现栈上分配，而避免堆上分配内存。
+>⚠️注意：基本数据类型存放在栈中是一个常见的误区！基本数据类型的成员变量如果没有被static修饰的话（不建议这么使用，应该要使用基本数据类型对应的包装类型），就存放在堆中。
+>```java
+>class BasicTypeVar{
+>  private int x;
+>}
+>```
+
+### 包装类的缓存机制了解吗？
+> Java基本数据类型的包装类型大部分都用到了缓存机制来提升性能。
+> Byte、Short、Integer、long这4种包装类默认创建了数值[-128,127]的相应类型的缓存数据，Character创建了数值在[0,127]范围的缓存数据，Boolean直接返回TRUE or FALSE。
+> Integer 缓存源码：
+> ```java
+> public static Integer valueOf(int i) {
+>     if (i >= IntegerCache.low && i <= IntegerCache.high)
+>         return IntegerCache.cache[i + (-IntegerCache.low)];
+>     return new Integer(i);
+> }
+> private static class IntegerCache {
+>     static final int low = -128;
+>     static final int high;
+>     static {
+>         // high value may be configured by property
+>         int h = 127;
+>     }
+> }
+> 
+> ```
+
+>Character 缓存源码：
+>```java
+>public static Character valueOf(char c) {
+>    if (c <= 127) { // must cache
+>      return CharacterCache.cache[(int)c];
+>    }
+>    return new Character(c);
+>}
+>
+>private static class CharacterCache {
+>    private CharacterCache(){}
+>    static final Character cache[] = new Character[127 + 1];
+>    static {
+>        for (int i = 0; i < cache.length; i++)
+>            cache[i] = new Character((char)i);
+>    }
+>
+>}
+>```
+
+>Boolean 缓存源码：
+>```java
+>public static Boolean valueOf(boolean b) {
+>return (b ? TRUE : FALSE);
+>}
+>```
+>如果超出对应范围仍然会创建新的对象，缓存的范围区间的大小只是在性能和资源之间的权衡。
+>两种浮点数类型的包装类 Float、Double 并没有实现缓存机制。
+>```java
+>Integer i1 = 33;
+>Integer i2 = 33;
+>System.out.println(i1 == i2);// 输出 true
+>
+>Float i11 = 333f;
+>Float i22 = 333f;
+>System.out.println(i11 == i22);// 输出 false
+>
+>Double i3 = 1.2;
+>Double i4 = 1.2;
+>System.out.println(i3 == i4);// 输出 false
+>```
+>下面我们来看一个问题：下面的代码的输出结果是true还是false呢？
+>```java
+>Integer i1 = 40;
+>Integer i2 = new Integer(40);
+>System.out.println(i1==i2);
+>```
+>Integer i1 = 40 这一行代码会发生装箱，也就是说这行代码等价于 Integer i1 = Integer.valueOf(40)。因此，i1直接使用的是缓存中的对象，而 Integer i2 = new Integer(40);会直接创建新的对象。
+>因此，答案是false。
+>记住：所有整型包装类对象之间值的比较，全部使用equals 方法比较。
+>![](https://github.com/pangeq/doctument/blob/uat/image/java/up-1ae0425ce8646adfb768b5374951eeb820d.webp)

@@ -14,7 +14,7 @@
 ### 2、JVM vs JDK vs JRE
 >- JVM
 >>Java 虚拟机（JVM） ，是运行Java字节码的虚拟机。JVM有针对不同系统特定实现（Windows，Linux，MacOs）,目的是使用相同的字节码，他们都会给出相同的结果。字节码和不同系统的JVM是实现Java语言“一次编译，随处运行”的关键所在
->>![运行在Java虚拟机之上的编程语言](https://github.com/pangeq/doctument/tree/uat/image/java/java-virtual-machine-program-language-os.png)
+>>![运行在Java虚拟机之上的编程语言](https://github.com/pangeq/doctument/blob/uat/image/java/java-virtual-machine-program-language-os.png)
 >>JVM 并不只有一种！只要满足JVM规范，每个组织、公司、个人都可以开发自己专属的JVM。我们平时接触的HotSpot VM仅仅是JVM规范的一种实现。
 >>其它JVM还有：J9 VM、Zing VM、JRockit VM 等JVM，扩展 各个版本JDK对应JVM规范 [Java SE Specifications](https://docs.oracle.com/javase/specs/index.html)
 >- JDK和JRE

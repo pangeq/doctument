@@ -392,3 +392,58 @@
 >    return sum;
 >}
 >```
+
+### 为什么浮点数运算时候会有精度丢失风险？
+>浮点数运算精度丢失代码示例：
+>```java
+>float a = 2.0f - 1.9f;
+>float b = 1.8f - 1.7f;
+>System.out.println(a);// 0.100000024
+>System.out.println(b);// 0.099999905
+>System.out.println(a == b);// false
+>```
+>为什么会出现这个问题呢？
+>这个和计算机保存浮点数的机制有很大的关系。我们都知道计算机是二进制的，而且计算机在表示一个数字时，宽度是有限的，无限循环小数存储在计算机时，只能被截断，所以就会导致小数精度发生损失的情况。这也就解释了为什么浮点数没有办法用二进制精确表示。
+>就比如说十进制下的0.2就没办法转换成二进制小数：
+>```java
+>// 0.2 转换为二进制数的过程为，不断乘以 2，直到不存在小数为止，
+>// 在这个计算过程中，得到的整数部分从上到下排列就是二进制的结果。
+>0.2 * 2 = 0.4 -> 0
+>0.4 * 2 = 0.8 -> 0
+>0.8 * 2 = 1.6 -> 1
+>0.6 * 2 = 1.2 -> 1
+>0.2 * 2 = 0.4 -> 0（发生循环）
+>...
+>```
+>关于浮点数的更多内容，建议看一下[计算机系统基础（四）浮点数](http://kaito-kidd.com/2018/08/08/computer-system-float-point/)这篇文章
+
+### 如何解决浮点数运算的精度丢失问题？
+> BigDecimal 可以实现对浮点数的运算，不会造成精度丢失。通常情况下，大部分需要浮点数精确运算结果的业务场景（比如涉及到钱的场景）都是通过**Bigdecimal** 来做的。
+> ```java
+> BigDecimal a = new BigDecimal("1.0");
+> BigDecimal b = new BigDecimal("0.9");
+> BigDecimal c = new BigDecimal("0.8");
+> 
+> BigDecimal x = a.subtract(b);
+> BigDecimal y = b.subtract(c);
+> 
+> System.out.println(x); /* 0.1 */
+> System.out.println(y); /* 0.1 */
+> System.out.println(Objects.equals(x, y)); /* true */
+> ```
+>关于 **Bigdecimal** 下边会有详细介绍
+
+### 超过long整型的数据应该如何表示？
+>基本数值类型都有一个表达范围，如果超过这个范围就会有数值溢出的风险。
+>在Java中，64位long 整型是最大的整数类型。
+>```java
+>long l = Long.MAX_VALUE;
+>System.out.println(l + 1); // -9223372036854775808
+>System.out.println(l + 1 == Long.MIN_VALUE); // true
+>```
+>BigInteger 内部使用int[] 数组来存储任意大小的整型数据。
+>相对于常规的整型类型来说，BigInteger 运算的效率相对会较低。
+
+## 变量
+### 成员变量与局部变量的区别？
+>![成员变量vs局部变量](https://github.com/pangeq/doctument/blob/uat/image/java/member-var-vs-local-var.png)

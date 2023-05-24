@@ -338,3 +338,57 @@
 >因此，答案是false。
 >记住：所有整型包装类对象之间值的比较，全部使用equals 方法比较。
 >![](https://github.com/pangeq/doctument/blob/uat/image/java/up-1ae0425ce8646adfb768b5374951eeb820d.webp)
+
+### 自动装箱和自动拆箱了解吗？原理是什么？
+>什么是自动拆装箱？
+>- 装箱：将基本类型用他们对应的引用类型包装起来
+>- 拆箱：将包装类型转换为基本数据类型。
+>举例：
+>```java
+>Integer i = 10;  //装箱
+>int n = i;   //拆箱
+>```
+>上面这两行代码对应的字节码为：
+>```java
+>  L1
+>
+>   LINENUMBER 8 L1
+>
+>   ALOAD 0
+>
+>   BIPUSH 10
+>
+>   INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+>
+>   PUTFIELD AutoBoxTest.i : Ljava/lang/Integer;
+>
+>  L2
+>
+>   LINENUMBER 9 L2
+>
+>   ALOAD 0
+>
+>   ALOAD 0
+>
+>   GETFIELD AutoBoxTest.i : Ljava/lang/Integer;
+>
+>   INVOKEVIRTUAL java/lang/Integer.intValue ()I
+>
+>   PUTFIELD AutoBoxTest.n : I
+>
+>   RETURN
+>```
+>从字节码中，我们发现装箱其实就是调用了包装类的valueOf()方法，拆箱其实就是调用了XXXValue()方法。
+>因此：
+>- Integer i = 10等价于 Integer i = Integer。valueOf(10);
+>- int n = i 等价于 int n = i.intValue();
+>注意：如果频繁拆装箱的话，也会严重影响系统性能。我们应该尽量避免不必要的拆装箱操作。
+>```java
+>private static long sum() {
+>    // 应该使用 long 而不是 Long
+>    Long sum = 0L;
+>    for (long i = 0; i <= Integer.MAX_VALUE; i++)
+>        sum += i;
+>    return sum;
+>}
+>```

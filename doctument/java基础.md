@@ -447,3 +447,142 @@
 ## 变量
 ### 成员变量与局部变量的区别？
 >![成员变量vs局部变量](https://github.com/pangeq/doctument/blob/uat/image/java/member-var-vs-local-var.png)
+>- 语法形式：从语法上来看，成员变量是属于类的，而局部变量是在代码块或方法中定义的变量或是方法的参数；成员变量可以被 public、private、static等修饰符所修饰，而局部变量不能被访问控制修饰符及static所修饰；但是，成员变量和局部变量都能被final修饰。
+>- 存储方式：从变量在内存中的存储方式来看，如果成员变量是使用static修饰的，那么这个成员变量是属于类的，如果没有使用static修饰，这个成员变量是属于实例的。而对象存在于堆内存，局部变量则存在于占内存。
+>- 生存时间：从变量在内存中的生存时间上看，成员变量是对象的一部分，它随着对的创建而存在，而局部变量随着方法的调用而自动生成，随着方法的调用结束而消亡。
+>- 默认值：从变量是否有默认值来看，成员变量如果没有被赋初始值，则会自动以类型的默认值而赋值（一种情况例外：被final修饰的成员变量也必须显式地赋值），而局部变量则不会自动赋值。
+>成员变量和局部变量代码示例：
+>```java
+>public class VariableExample {
+>
+>    // 成员变量
+>    private String name;
+>    private int age;
+>
+>    // 方法中的局部变量
+>    public void method() {
+>        int num1 = 10; // 栈中分配的局部变量
+>        String str = "Hello, world!"; // 栈中分配的局部变量
+>        System.out.println(num1);
+>        System.out.println(str);
+>    }
+>
+>    // 带参数的方法中的局部变量
+>    public void method2(int num2) {
+>        int sum = num2 + 10; // 栈中分配的局部变量
+>        System.out.println(sum);
+>    }
+>
+>    // 构造方法中的局部变量
+>    public VariableExample(String name, int age) {
+>        this.name = name; // 对成员变量进行赋值
+>        this.age = age; // 对成员变量进行赋值
+>        int num3 = 20; // 栈中分配的局部变量
+>        String str2 = "Hello, " + this.name + "!"; // 栈中分配的局部变量
+>        System.out.println(num3);
+>        System.out.println(str2);
+>    }
+>}
+>```
+
+### 静态变量有什么作用？
+>静态变量也就是被 static 关键字修饰的变量，它可以被类的所有实例共享，无论一个类创建了多少个对象，他们都共享一份静态变量。也就是说，静态变量只会被分配一次内存，即使创建多个对象，这样可以节省内存。
+>静态变量是通过类名来访问的，例如 StaticVariableExample.staticVar (如果被private关键字修饰就无法这样访问了)。
+>```java
+>public class StaticVariableExample {
+>// 静态变量
+>public static int staticVar = 0;
+>}
+>```
+>通常情况下，静态变量会被final关键字修饰成为常量。
+>```java
+>public class ConstantVariableExample {
+>    // 常量
+>    public static final int constantVar = 0;
+>}
+>```
+
+### 字符型常量和字符串常量的区别？
+>- 形式：字符常量是单引号引起的一个字符，字符串常量是双引号引起的0个或若干个字符。
+>- 含义：字符常量相当于一个整型值（ASCII值），可以参加表达式运算；字符串常量代表一个地址值（该字符串在内存中存放位置）。
+>- 占内存大小：字符常量只占两个字节；字符串常量占若干个字节。
+>⚠️注意 char 在Java中占两个字节。
+>字符型常量和字符串常量代码示例：
+>```java
+>public class StringExample {
+>   // 字符型常量
+>   public static final char LETTER_A = 'A';
+>
+>   // 字符串常量
+>   public static final String GREETING_MESSAGE = "Hello, world!";
+>   public static void main(String[] args) {
+>       System.out.println("字符型常量占用的字节数为："+Character.BYTES);
+>       System.out.println("字符串常量占用的字节数为："+GREETING_MESSAGE.getBytes().length);
+>   }
+>}
+>```
+>输出
+>```java
+>字符型常量占用的字节数为：2
+>字符串常量占用的字节数为：13
+>```
+
+## 方法
+### 什么是方法的返回值？方法有哪几种类型？
+>方法的返回值：是指我们获取到某个方法中的代码执行后产生的结果！（前提是该方法可能产生结果）。返回值的作用是接收结果，使得它可用于其它操作。
+>我们可以按照方法的返回值和参数类型将方法分为下面几种：
+>1、无参数无返回值方法
+>```java
+>public void f1() {
+>//......
+>}
+>// 下面这个方法也没有返回值，虽然用到了 return
+>public void f(int a) {
+>if (...) {
+>// 表示结束方法的执行,下方的输出语句不会执行
+>return;
+>}
+>System.out.println(a);
+>}
+>```
+>2、有参无返回值的方法
+>```java
+>public void f2(Parameter 1, ..., Parameter n) {
+>//......
+>}
+>```
+>3、有返回值无参数的方法
+>```java
+>public int f3() {
+>//......
+>return x;
+>}
+>```
+>4、有参数有返回值的方法
+>```java
+>public int f4(int a, int b) {
+>    return a * b;
+>}
+>```
+
+### 静态方法为什么不能调用非静态成员？
+>这个要结合JVM 的相关知识，主要原因如下：
+>1、静态方法是属于类的，在类加载的时候就会分配内存，可以通过类名.静态方法名的的方式直接访问。而非静态成员属于实例对象，只有在对象实例化之后才存在，需要通过类的实例对象去访问。
+>2、在类的非静态成员不存在的时候静态方法已经存在了，此时调用在内存中还不存在的非静态成员是非法操作。
+>```java
+>public class Example {
+>    // 定义一个字符型常量
+>    public static final char LETTER_A = 'A';
+>
+>    // 定义一个字符串常量
+>    public static final String GREETING_MESSAGE = "Hello, world!";
+>
+>    public static void main(String[] args) {
+>        // 输出字符型常量的值
+>        System.out.println("字符型常量的值为：" + LETTER_A);
+>
+>        // 输出字符串常量的值
+>        System.out.println("字符串常量的值为：" + GREETING_MESSAGE);
+>    }
+>}
+>```

@@ -1,4 +1,4 @@
-# java基础
+# java基础（上）
 ## 一、基础概念与尝试
 ### 1、java语言特点
 >- 简单易学
@@ -644,3 +644,89 @@
 | 访问修饰符 |  可修改  | 一定不能做更严格的限制（可以降低限制）                       |
 |  发生阶段  |  编译期  | 运行期                                                       |
 > 方法的重写要遵循“两同两小一大”（以下内容摘录自《疯狂Java讲义》，[issue#892](https://github.com/Snailclimb/JavaGuide/issues/892)）
+> - “两同”即方法名相同、形参列表相同；
+> - “两小”指的是子类方法返回值类型应比父类方法返回值类型更小或相等，子类方法声明抛出的异常类应比父类方法声明抛出的异常类更小或相等；
+> - “一大”指的是子类方法的访问权限应比父类方法的访问权限更大或相等。
+> ⭐️ 关于 重写的返回值类型 这里需要额外多说明一下，上面的表述不太清晰准确：如果方法的返回类型是 void 和基本数据类型，则返回值重写时不可修改。但是如果方法的返回值是引用类型，重写时是可以返回该引用类型的子类的。
+> ```java
+> public class Hero {
+>     public String name() {
+>         return "超级英雄";
+>     }
+> }
+> public class SuperMan extends Hero{
+>     @Override
+>     public String name() {
+>         return "超人";
+>     }
+>     public Hero hero() {
+>         return new Hero();
+>     }
+> }
+> 
+> public class SuperSuperMan extends SuperMan {
+>     public String name() {
+>         return "超级超级英雄";
+>     }
+> 
+>     @Override
+>     public SuperMan hero() {
+>         return new SuperMan();
+>     }
+> }
+> ```
+
+### 什么是可变长参数？
+>从 Java5 开始，Java 支持定义可变长参数，所谓可变长参数就是允许在调用方法时传入不定长度的参数。就比如下面的这个 printVariable 方法就可以接受 0 个或者多个参数。
+>```java
+>public static void method1(String... args) {
+>//......
+>}
+>```
+>另外，可变参数只能作为函数的最后一个参数，但其前面可以有也可以没有任何其他参数。
+>```java
+>public static void method2(String arg1, String... args) {
+>//......
+>}
+>```
+>**遇到方法重载的情况怎么办呢？会优先匹配固定参数还是可变参数的方法呢？**
+>答案是会优先匹配固定参数的方法，因为固定参数的方法匹配度更高。
+>```java
+>/**
+>* 微信搜 JavaGuide 回复"面试突击"即可免费领取个人原创的 Java 面试手册
+>*
+>* @author Guide哥
+>* @date 2021/12/13 16:52
+>**/
+>public class VariableLengthArgument {
+>
+>   public static void printVariable(String... args) {
+>       for (String s : args) {
+>           System.out.println(s);
+>       }
+>   }
+>
+>   public static void printVariable(String arg1, String arg2) {
+>       System.out.println(arg1 + arg2);
+>   }
+>
+>   public static void main(String[] args) {
+>       printVariable("a", "b");
+>       printVariable("a", "b", "c", "d");
+>   }
+>}
+>```
+>输出：
+>```text
+>ab
+>a
+>b
+>c
+>d
+>```
+
+## 参考
+>- What is the difference between JDK and JRE?：https://stackoverflow.com/questions/1906445/what-is-the-difference-between-jdk-and-jre
+>- Oracle vs OpenJDK：https://www.educba.com/oracle-vs-openjdk/
+>- Differences between Oracle JDK and OpenJDK：https://stackoverflow.com/questions/22358071/differences-between-oracle-jdk-and-openjdk
+>- 彻底弄懂 Java 的移位操作符：https://juejin.cn/post/6844904025880526861

@@ -43,7 +43,7 @@
 >>- 为什么说JAVA语言“编译与解释并存 ：这是因为Java具有这两种解释性、编译型语言的特征，因为Java程序需要先编译，后解释两个步骤，有Java编写的程序需要先经过编译步骤，生成字节码（.class文件），这种字节码必须由Java解释器来进行解释执行。
 
 ### 3、Oracle JDK vs OpenJDK
->- 来源：2006年 ，SUN公司将Java开源，也就有了OpenJDK 。2009年年，Oracle将SUN公司收购，于是自己在OpenJDK的基础上搞了一个OracleJDK。Oracle JDK不是开源的，并且刚开始的几个版本（Java8~Java11）还会相比于OpenJDK 添加了一些特有的功能和工具。
+>- 来源：2006年 ，SUN公司将Java开源，也就有了OpenJDK 。2009年，Oracle将SUN公司收购，于是自己在OpenJDK的基础上搞了一个OracleJDK。Oracle JDK不是开源的，并且刚开始的几个版本（Java8~Java11）还会相比于OpenJDK 添加了一些特有的功能和工具。
 >其次，对于Java7而言，OpenJDK 和 OracleJDK 十分接近。Oracle JDK 是基于 OpenJDK 开发的，只添加了一些小功能，由Oracle工程师参与维护。
 >区别：
 >- 是否开源：OpenJDK 是一个参考模型并且完全开源，OracleJDK 是基于OpenJDK实现，并不完全开源。openJdk开源项目：https://github.com/openjdk/jdk

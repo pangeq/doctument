@@ -46,3 +46,25 @@ Host github.com
 >- git branch -a （查看所有分支）
 >- git remote remove origin (解除关联，也可以直接删除.git 重新设置)
 >- git remote -v（查看远程关联仓库）
+
+### 三、git 提交单个或多个文件
+>```text
+>1.git status
+>//查看修改的所有内容（或者git status -s）
+>2.git add ’ ’，例如:（git add components/pages/holders/xxx.vue）
+>//’ '引号中间放上文件名，执行上一步后，会显示文件名跟目录
+>
+>//多个文件用空格分开
+>3.git stash -u -k
+>//忽略其他文件,很重要的一步！！！！
+>4.git cimmit - m ’ ’
+>//备注提交的内容
+>5.git pull
+>6.git push
+>7.git stash pop
+>```
+
+## 问题记录
+### 解决warning: LF will be replaced by CRLF in方法
+>- windows 用户 git config --global core.autocrlf false
+>- mac/linux用户  git config --global core.autocrlf input 

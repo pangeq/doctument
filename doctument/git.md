@@ -64,6 +64,11 @@ Host github.com
 >git stash pop （恢复之前忽略的文件，非常重要的一步，一开始没有执行这个命令，亏大了，做了一天的工作白努力了）
 >```
 
+### git提交忽略部分文件
+```text
+在 .git/info/exclude 添加想要忽略的文件路径即可  # 为注释符号
+```
+
 ## 问题记录
 ### 解决warning: LF will be replaced by CRLF in方法
 >- windows 用户 git config --global core.autocrlf false

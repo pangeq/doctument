@@ -49,19 +49,19 @@ Host github.com
 
 ### 三、git 提交单个或多个文件
 >```text
->1.git status
->//查看修改的所有内容（或者git status -s）
->2.git add ’ ’，例如:（git add components/pages/holders/xxx.vue）
->//’ '引号中间放上文件名，执行上一步后，会显示文件名跟目录
+>git status -s 查看仓库状态
 >
->//多个文件用空格分开
->3.git stash -u -k
->//忽略其他文件,很重要的一步！！！！
->4.git cimmit - m ’ ’
->//备注提交的内容
->5.git pull
->6.git push
->7.git stash pop
+>git add 文件所在路径，（如：src/components/文件名，注意是相对路径）
+>
+>git stash -u -k （这个命令是用于忽略其他文件，把现修改的隐藏起来，这样提交的时候就不会提交未被add的文件）
+>
+>git commit -m “注释”
+>
+>git pull （git pull origin 其他分支名（这个命令是用于提交到不同分支详情查看这篇文章git文件提交到不同分支）） （拉取合并 ）
+>
+>git push [origin 其他分支名] 推送到远程仓库
+>
+>git stash pop （恢复之前忽略的文件，非常重要的一步，一开始没有执行这个命令，亏大了，做了一天的工作白努力了）
 >```
 
 ## 问题记录
